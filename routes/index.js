@@ -4,6 +4,11 @@ var Nexmo = require('nexmo');
 
 var router = express.Router();
 
+var nexmo = new Nexmo({
+  apiKey:'',
+  apiSecret: ''
+}, {debug:true});
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
