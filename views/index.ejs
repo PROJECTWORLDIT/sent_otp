@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+      <h2>
+        <b>Send your message </b>
+      </h2>
+      <br/>
+      <form action="">
+        <input type="number" name="number" id="number" placeholder="Enter your mobile number....." class="form-control">
+        <br/>
+        <input type="text" name="msg" id="msg" placeholder="Enter your text.............." class="form-control">
+        <br/>
+        <button type="button" onclick="sendMsg();" id="btnclick" class="btn btn-primary btn-lg">click here</button>
+      </form>
+      <p id="result"></p>
+
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  <script>
+/*      $('#btnclick').on('click', function(){
+      sendMsg();
+    });
+ */
+
+    function sendMsg() {
+      var objData = {
+        number: $('#number').val(),
+        text: $('#msg').val()
+      }
+
+      $('#result').text('please wait text msg is sending');
+      //  alert("here is="+number+ "text="+text);
+      $.ajax({
+        type: 'POST',
+        url: '/senddata',
+        data: {mykey: JSON.stringify(objData)},
+        dataType: 'json',
+        success: function(res) {
+        $('#result').empty().text('message is sended on mobile number check mobile hi'+res.messages[0].to);
+        //location.reload();
+        //alert('data is inserted');
+        },
+        error: function(xhr, status, error) {
+            alert('here is error');
+        }
+      }); 
+    }
+    
+    
+  </script>
+
+
+
+
+</body>
+
+</html>
